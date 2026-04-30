@@ -1,5 +1,5 @@
 ---
-name: 기능 개발 및 개선 요(Feature request)
+name: 기능 개발 및 개선 요청(Feature request)
 about: 새로운 기능 추가 또는 기존 기능의 개선을 제안해주세요
 title: ''
 labels: enhancement
