@@ -1,0 +1,414 @@
+:root {
+  /* 기본 색상 5단계 (동일 채도 쿨 그레이 정렬) */
+  --color-step-1: #1e1e21;
+  --color-step-2: #252529;
+  --color-step-3: #2d2d33;
+  --color-step-4: #36363d;
+  --color-step-5: #3f3f47;
+
+  /* 폰트 색상 3단계 */
+  --text-step-1: #ffffff;
+  --text-step-2: #cccccc;
+  --text-step-3: #888888;
+
+  /* 강조 색상 */
+  --point-color: #4da3ff; 
+  --warn-color: #e81123;
+
+  /* 크기 규격 */
+  --size-control-h: 32px;
+  --size-execute-h: 42px;
+  --title-bar-height: 35px;
+}
+
+/* 기본 스타일 리셋 */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-step-1);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--color-step-1);
+  color: var(--text-step-1);
+  overflow: hidden;
+}
+
+.title-bar {
+  height: var(--title-bar-height);
+  min-height: var(--title-bar-height);
+  background-color: var(--color-step-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-app-region: drag; /* 이 구역을 잡고 창을 움직일 수 있음 */
+  user-select: none;
+  border-bottom: 1px solid var(--color-step-5);
+}
+
+.title {
+  padding-left: 15px;
+  font-size: 12px;
+  color: var(--text-step-2);
+}
+
+.window-controls {
+  display: flex;
+  height: 100%;
+  -webkit-app-region: no-drag;
+  position: relative;
+  z-index: 9999;
+}
+
+.window-controls button {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 45px;
+  height: 100%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.window-controls button:hover { background-color: var(--color-step-5); }
+.window-controls .close-btn:hover { background-color: var(--warn-color); }
+
+.body-container {
+  display: flex;
+  flex: 1; /* 남은 화면 전체 차지 */
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 200px;
+  min-width: 200px;
+  background-color: var(--color-step-2);
+  display: flex;
+  flex-direction: column;
+  padding: 15px 8px;
+  gap: 4px;
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* 부모인 sidebar와 동일한 간격 유지 */
+}
+
+.menu-group-header {
+  padding: 10px 12px;
+  text-align: left;
+  color: var(--text-step-2);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.menu-sub-items {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  gap: 4px;
+  margin-top: 2px;
+  position: relative; /* 가상 요소 위치 지정을 위해 relative 설정 */
+}
+
+/* 메뉴 하위 항목 그룹에 세로선 추가 */
+.menu-sub-items::before {
+  content: '';
+  position: absolute;
+  left: 14px; /* 들여쓰기된 항목의 왼쪽에 위치 (sidebar padding 8px + menu-group-header padding 12px = 20px) */
+  top: 0;
+  height: 100%; /* 부모 요소의 전체 높이만큼 선을 그림 */
+  width: 2px; /* 선의 두께 */
+  background-color: var(--text-step-2); /* 테마 색상에 맞춰 조절 */
+  border-radius: 1px; /* 선의 끝을 부드럽게 처리 */
+}
+
+.sidebar a {
+  padding: 10px 12px;
+  text-align: left;
+  background: transparent;
+  color: var(--text-step-2);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.menu-sub-items a {
+  padding-left: 28px; /* 기본 12px + 들여쓰기 16px */
+}
+
+.sidebar a:hover { background: var(--color-step-3); }
+.sidebar a.active { color: var(--text-step-1); font-weight: bold; background: var(--color-step-4); }
+
+.content { 
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px; 
+  overflow: hidden;
+}
+
+/* PageContainer 루트 요소 스타일 */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 15px 15px; /* 상단 여백 대폭 축소, 좌우 여백 조정 */
+}
+
+.page-header {
+  margin-bottom: 15px; /* 제목과 컨텐츠 사이 간격 축소 */
+}
+
+.page-header h2 {
+  font-size: 1.8rem; /* 제목 크기 */
+  color: var(--text-step-1);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 페이지 제목 우측 도움말 아이콘 스타일 */
+.page-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-step-3);
+  border: 1px solid var(--color-step-5);
+  color: var(--text-step-3);
+  border-radius: 50%;
+  font-size: 13px;
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-weight: bold;
+  cursor: help;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.page-info-icon:hover {
+  background-color: var(--color-step-4);
+  color: var(--text-step-1);
+  border-color: var(--point-color);
+}
+
+/* PageContainer 내부의 main.page-content 스타일 */
+.page-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 진행 바 공통 규격 */
+.progress-container {
+  flex: 1;
+  height: var(--size-execute-h);
+  background-color: var(--color-step-2);
+  border: 1px solid var(--color-step-5);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* 높이 42px에 테두리 포함 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--point-color);
+  transition: width 0.2s ease-out;
+}
+
+.progress-text {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+  color: var(--text-step-1);
+  font-weight: bold;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 공통 액션 레이아웃 규격 --- */
+
+/* 하단 작업 영역 공통 규격 */
+.action-footer {
+  display: flex;
+  justify-content: space-between; /* 양쪽 정렬 */
+  align-items: center;
+  gap: 15px;
+  padding-top: 15px;
+  margin-top: 10px;
+  border-top: 1px solid var(--color-step-4);
+}
+
+/* 하단 우측 버튼 그룹 */
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 12px;
+}
+
+.footer-left-group,
+.footer-right-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* 푸터 전용 입력 그룹 (라벨 + 컨트롤) */
+.footer-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-input-group label {
+  font-size: 0.85rem;
+  color: var(--text-step-2);
+  white-space: nowrap;
+  line-height: 1; /* 텍스트 높이 고정 */
+}
+
+/* 메인 실행 버튼 (Job Button) 규격 통일 */
+.run-btn {
+  height: var(--size-execute-h);
+  padding: 0 40px;
+  background-color: var(--point-color);
+  color: var(--text-step-1);
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn-standard {
+  background: var(--color-step-3);
+  color: var(--text-step-2);
+  border: 1px solid var(--color-step-5);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-standard:hover:not(:disabled) {
+  background: var(--color-step-4);
+  color: var(--text-step-1);
+}
+
+.btn-standard:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Path Picker 공통 */
+.path-picker-mini {
+  flex: 1;
+  max-width: 600px;
+}
+
+.path-picker {
+  display: flex;
+  gap: 4px;
+}
+
+.path-picker input {
+  width: 200px;
+}
+
+.btn-browse {
+  height: var(--size-control-h);
+  padding: 0 12px;
+  background-color: var(--color-step-3);
+  border: 1px solid var(--color-step-5);
+  color: var(--text-step-2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.btn-browse:hover {
+  background-color: var(--color-step-4);
+  color: var(--text-step-1);
+}
+
+/* 큰 사이즈의 btn-secondary (예: 추가 버튼) */
+.btn-standard.btn-large {
+  height: var(--size-execute-h);
+  padding: 0 30px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn-reset {
+  background: transparent;
+  border: 1px solid var(--color-step-5);
+  color: var(--text-step-3);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-reset:hover {
+  background: var(--color-step-3);
+  color: var(--warn-color);
+  border-color: var(--warn-color);
+}
+
+/* 아이콘 버튼 (삭제 버튼 등) */
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-step-3);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0 5px;
+  transition: color 0.2s;
+}
+
+.btn-icon:hover {
+  color: var(--text-step-1);
+}
+.run-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.run-btn:disabled {
+  background-color: var(--color-step-5);
+  color: var(--text-step-3);
+  cursor: not-allowed;
+}

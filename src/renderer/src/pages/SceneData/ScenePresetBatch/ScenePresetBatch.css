@@ -1,0 +1,116 @@
+.scene-preset-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.blocks-list {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding-right: 8px;
+}
+
+/* 스크롤바 스타일 통일 (RandomWeight와 동일) */
+.blocks-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blocks-list::-webkit-scrollbar-track {
+  background: var(--color-step-1);
+  border-radius: 4px;
+}
+
+.blocks-list::-webkit-scrollbar-thumb {
+  background: var(--color-step-5);
+  border-radius: 4px;
+}
+
+.blocks-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-step-3);
+}
+
+.preset-block-card {
+  background: var(--color-step-2);
+  border: 1px solid var(--color-step-5);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: all 0.2s;
+}
+
+.preset-block-card.sequential {
+  border-left: 4px solid var(--point-color);
+}
+
+.preset-block-card.dragging {
+  opacity: 0.4;
+  border: 1px dashed var(--point-color);
+}
+
+.block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background: var(--color-step-4);
+  border-bottom: 1px solid var(--color-step-5);
+  cursor: grab;
+  user-select: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.block-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.block-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--color-step-5);
+  color: var(--text-step-2);
+}
+
+.block-badge.sequential {
+  background: var(--point-color);
+  color: var(--text-step-1);
+}
+
+.block-index {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-step-1);
+}
+
+.item-count-label {
+  font-size: 0.8rem;
+  color: var(--text-step-3);
+}
+
+.block-body {
+  padding: 15px;
+}
+
+.add-block-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 30px 0;
+}
+
+.combination-info {
+  font-weight: bold;
+  color: var(--text-step-1);
+  background: var(--color-step-3);
+  padding: 0 15px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

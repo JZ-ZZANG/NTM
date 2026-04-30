@@ -1,0 +1,19 @@
+{
+  "sideBar": {
+    "home": "Home",
+    "tagRemover": "Tag Remover",
+    "wildcard": "Wildcard",
+    "settings": "Settings"
+  },
+  "titleBar": {
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "close": "Close"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "browse": "Browse..."
+  }
+}

@@ -1,0 +1,216 @@
+.random-weight-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* PageContainer의 page-content가 flex-direction: column이므로 */
+  min-height: 0;
+}
+
+.mix-set-card {
+  background: var(--color-step-2);
+  border: 1px solid var(--color-step-5);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  /* overflow: hidden 제거하여 자동완성이 카드 밖으로 나오게 함 */
+  transition: border-color 0.2s;
+}
+
+.mix-set-card.dragging {
+  opacity: 0.4;
+  border: 1px dashed var(--point-color);
+  transform: scale(0.98);
+}
+
+.set-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background: var(--color-step-4);
+  border-bottom: 1px solid var(--color-step-5);
+  cursor: grab; /* 드래그 가능 아이콘 */
+  user-select: none;
+}
+
+.mix-sets-list {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-gutter: stable; /* 스크롤바 공간을 미리 예약하여 레이아웃 흔들림 방지 */
+  padding-right: 8px;
+}
+
+/* 스크롤바 전체 영역 스타일 */
+.mix-sets-list::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+}
+
+/* 스크롤바 트랙(배경) 스타일 */
+.mix-sets-list::-webkit-scrollbar-track {
+  background: var(--color-step-1);
+  border-radius: 4px;
+}
+
+/* 스크롤바 핸들(움직이는 부분) 스타일 */
+.mix-sets-list::-webkit-scrollbar-thumb {
+  background: var(--color-step-5);
+  border-radius: 4px;
+}
+
+/* 핸들에 마우스 올렸을 때 스타일 */
+.mix-sets-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-step-3);
+}
+
+.set-title {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-step-2);
+}
+
+.set-body {
+  padding: 15px;
+  background: var(--color-step-2); 
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* 자식 요소들이 높이를 맞추도록 설정 */
+  gap: 20px;
+  border-radius: 0 0 8px 8px;
+}
+
+.tags-section {
+  flex: 1;
+  min-width: 300px;
+  display: flex; /* 자식인 TagInput이 꽉 차도록 */
+}
+
+.settings-section {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 15px;
+  border-left: 1px solid var(--color-step-4);
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.setting-item label {
+  font-size: 0.85rem; 
+  color: var(--text-step-2); 
+  font-weight: 600; 
+  margin-bottom: 5px;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.range-inputs input {
+  width: 55px;
+  text-align: center;
+}
+
+.step-separator {
+  color: var(--text-step-3);
+  font-size: 0.8rem;
+  margin: 0 2px;
+}
+
+.step-input-wrapper {
+  position: relative;
+}
+
+.step-input {
+  width: 55px !important;
+  border-color: var(--color-step-5) !important;
+  color: var(--text-step-2) !important;
+}
+
+.step-input:focus {
+  border-color: var(--point-color) !important;
+}
+
+/* 숫자 입력창 화살표(Spin Button) 제거 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 지원 */
+}
+
+.prob-slider {
+  width: 100%;
+  accent-color: var(--point-color);
+}
+
+
+.add-set-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 30px 0; /* 아래쪽 충분한 여백 확보 */
+}
+
+.action-group-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bulk-apply-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 박스와 아이콘 사이의 간격 */
+}
+
+.bulk-apply-tool {
+  display: flex;
+  align-items: center;
+  background: var(--color-step-3);
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid var(--color-step-5);
+}
+
+.bulk-step-input {
+  width: 60px;
+  height: 28px;
+  border: none !important;
+  background: transparent !important;
+  text-align: center;
+}
+
+.btn-apply {
+  background: var(--color-step-5);
+  color: var(--text-step-1);
+  border: none;
+  padding: 0 12px;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-apply:hover {
+  background: var(--point-color);
+  color: var(--text-step-1);
+}
+
+
+.gen-count-input {
+  width: 70px;
+}
+
+.empty-msg {
+  font-size: 1rem;
+}
