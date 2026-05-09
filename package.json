@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "dev": "chcp 65001 && (if exist dist-electron rmdir /s /q dist-electron) && vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "dist": "npm run build && electron-builder",
     "dist:publish": "npm run build && electron-builder --publish always",
     "preview": "vite preview"
