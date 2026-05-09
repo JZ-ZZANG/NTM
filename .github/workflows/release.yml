@@ -31,6 +31,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update release name
-        run: gh release edit ${{ github.ref_name }} --title "NTM ${{ github.ref_name }}"
+        run: gh release edit ${{ github.ref_name }} --title "NTM ${{ github.ref_name }}" --draft=false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
