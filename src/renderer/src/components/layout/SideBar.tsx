@@ -14,6 +14,11 @@ const SideBar: React.FC = () => {
         >{t('sideBar.home')}</NavLink>
 
         <NavLink 
+          to="/tag-viewer" 
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >{t('sideBar.tagViewer')}</NavLink>
+
+        <NavLink 
           to="/tag-remover" 
           className={({ isActive }) => (isActive ? 'active' : '')}
         >{t('sideBar.tagRemover')}</NavLink>

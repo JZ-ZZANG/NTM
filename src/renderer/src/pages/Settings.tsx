@@ -8,22 +8,21 @@ const Settings: React.FC = () => {
   const { settings, setLanguage } = useAppStore();
 
   return (
-    <PageContainer title={t('settings.title')}>
-      <section className="setting-section">
-        <h3 className="section-title">{t('settings.language')}</h3>
-        <div className="setting-item">
+    <PageContainer title={t('settings.title')} info={t('settings.pageInfo')}>
+      <div className="page-content settings-content">
+        <div className="form-row">
+          <label className="form-label">{t('settings.language')}</label>
           <select 
             value={settings.language} 
             onChange={(e) => setLanguage(e.target.value as any)}
-            className="lang-select"
+            className="option-control"
           >
             <option value="ko">한국어</option>
             <option value="en">English</option>
             <option value="ja">日本語</option>
           </select>
         </div>
-      </section>
-      {/* 다른 설정들은 추후 이곳에 추가 예정 */}
+      </div>
     </PageContainer>
   );
 };

@@ -1,6 +1,7 @@
 {
   "sideBar": {
     "home": "홈",
+    "tagViewer": "태그 뷰어",
     "tagRemover": "태그 제거",
     "sceneDataGroup": "씬 데이터",
     "randomWeight": "랜덤 가중치 조합 생성",
@@ -14,10 +15,28 @@
     "restore": "복원",
     "close": "닫기"
   },
+  "common": {
+    "tagPlaceholder": "태그 입력...",
+    "tag": "태그",
+    "confirm": "확인",
+    "cancel": "취소",
+    "warning": "경고",
+    "electronApiNotLoaded": "Electron API가 로드되지 않았습니다. Preload 설정을 확인하세요.",
+    "runButton": "작업 시작",
+    "outputDirLabel": "저장 위치",
+    "outputDirPlaceholder": "저장할 폴더 선택",
+    "resetInputs": "입력 초기화",
+    "confirmReset": "모든 입력을 초기화하시겠습니까?",
+    "generateResult": "저장이 완료 되었습니다.",
+    "saveError": "파일 저장 중 오류가 발생했습니다: {{error}}",
+    "collapse": "접기",
+    "expand": "펼치기"
+  },
   "settings": {
     "title": "설정",
     "language": "언어 설정",
-    "browse": "찾아보기..."
+    "browse": "찾아보기...",
+    "pageInfo": "애플리케이션의 전역 설정을 관리합니다."
   },
   "tagRemover": {
     "prefix": "접두사",
@@ -40,26 +59,24 @@
       "source": "원본 폴더",
       "custom": "사용자 지정"
     },
-    "dropzone": "파일 또는 폴더를 드래그하거나 클릭하여 추가하세요",
+    "dropzone": "파일 또는 폴더를 드롭 하거나 클릭하여 추가하세요",
     "pageInfo": "이미지 파일에서 태그를 제거하고 새로운 파일로 저장합니다."
   },
-  "common": {
-    "tagPlaceholder": "태그 입력...",
-    "tag": "태그",
-    "confirm": "확인",
-    "cancel": "취소",
-    "warning": "경고",
-    "electronApiNotLoaded": "Electron API가 로드되지 않았습니다. Preload 설정을 확인하세요.",
-    "runButton": "작업 시작",
-    "outputDirLabel": "저장 위치",
-    "outputDirPlaceholder": "저장할 폴더 선택",
-    "resetInputs": "입력 초기화",
-    "confirmReset": "모든 입력을 초기화하시겠습니까?",
-    "generateResult": "저장이 완료 되었습니다.",
-    "saveError": "파일 저장 중 오류가 발생했습니다: {{error}}",
-    "collapse": "접기",
-    "expand": "펼치기"
+  "tagViewer": {
+    "pageInfo": "Novel AI로 생성한 이미지 파일의 메타데이터를 확인합니다.",
+    "metadataTitle": "이미지 메타데이터",
+    "dropzone": "이미지를 드롭하거나 클릭하여 추가하세요",
+    "metadataLoading": "메타데이터를 불러오는 중...",
+    "metadataError": "메타데이터 추출에 실패했습니다.",
+    "noMetadataFound": "이 이미지에는 메타데이터가\n포함되어 있지 않습니다",
+    "positivePrompt": "긍정 프롬프트",
+    "negativePrompt": "부정 프롬프트",
+    "charPrompt": "캐릭터 프롬프트",
+    "settings": "생성 설정",
+    "copy": "복사",
+    "copied": "복사 완료!"
   },
+
   "randomWeight": {
     "title": "랜덤 가중치 조합 생성",
     "pageInfo": "가중치와 등장확률을 랜덤으로 배치하여 씬 데이터를 생성합니다.\n단위를 0으로 설정하면 기본값인 0.01 단위로 가중치가 계산됩니다.",

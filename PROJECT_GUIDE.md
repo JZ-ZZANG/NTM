@@ -68,9 +68,8 @@ NAI_tag_manager/
 ├── resources/                # 앱 패키징 시 필요한 리소스 (아이콘 등)
 ├── locales/                  # 다국어 지원 JSON 파일 (ko.json, en.json, ja.json)
 ├── data/                     # 대용량 정적 데이터 (tags.json 등)
-├── package.json              # 의존성 및 스크립트 설정
+├── package.json              # 의존성 및 스크립트 설정 및 빌드 배포 설정
 ├── vite.config.ts            # Vite 빌드 설정
-├── electron-builder.yml      # Electron 빌드 및 배포 설정
 └── tsconfig.json             # TypeScript 설정
 ```
 

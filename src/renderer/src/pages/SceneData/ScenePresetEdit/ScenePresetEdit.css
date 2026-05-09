@@ -14,8 +14,8 @@
   align-items: center;
   justify-content: center;
   border: 2px dashed var(--color-step-5);
-  border-radius: 12px;          /* 8px → 12px */
-  background-color: var(--color-step-1);  /* step-2 → step-1 */
+  border-radius: 12px;
+  background-color: var(--color-step-1);
   transition: all 0.2s ease;
   cursor: pointer;
   color: var(--text-step-3);
@@ -23,13 +23,12 @@
 
 .file-loader-zone.active {
   border-color: var(--point-color);
-  background-color: var(--color-step-4);  /* step-3 → step-4 */
+  background-color: var(--color-step-4);
   color: var(--point-color);
 }
 
 .file-loader-zone:hover {
   background-color: var(--color-step-3);
-  border-color: var(--color-step-5);
   color: var(--text-step-2);
 }
 
@@ -44,7 +43,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 16px;
-  background-color: var(--color-step-3);
+  background-color: var(--color-step-2);
   border: 1px solid var(--color-step-5);
   border-radius: 4px;
   margin-bottom: 0px;
@@ -98,14 +97,10 @@
   gap: 8px;
   flex: 1;
   overflow-y: auto;
-  scrollbar-gutter: stable;
-  padding-right: 8px;
+  scrollbar-gutter: stable; /* Keep this */
+  padding-right: 8px; /* Keep this */
+  /* Scrollbar styles moved to App.css and applied via .custom-scrollbar */
 }
-
-.module-cards-container::-webkit-scrollbar { width: 6px; }
-.module-cards-container::-webkit-scrollbar-track { background: var(--color-step-1); border-radius: 4px; }
-.module-cards-container::-webkit-scrollbar-thumb { background: var(--color-step-5); border-radius: 4px; }
-.module-cards-container::-webkit-scrollbar-thumb:hover { background: var(--text-step-3); }
 
 
 .module-card {
@@ -134,20 +129,8 @@
 }
 
 .module-inputs .option-control {
-  height: var(--size-control-h);
-  background-color: var(--color-step-1);
-  border: 1px solid var(--color-step-5);
-  color: var(--text-step-1);
-  border-radius: 4px;
-  padding: 0 10px;
-  font-size: 0.85rem;
-  outline: none;
   flex: 1;
   min-width: 100px;
-}
-
-.module-inputs .option-control:focus {
-  border-color: var(--point-color);
 }
 
 .match-indicator {
@@ -162,18 +145,13 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  scrollbar-gutter: stable;
-  padding-right: 8px;
+  scrollbar-gutter: stable; /* Keep this */
+  padding-right: 8px; /* Keep this */
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 5px;
 }
-
-.items-list::-webkit-scrollbar { width: 8px; }
-.items-list::-webkit-scrollbar-track { background: var(--color-step-1); border-radius: 4px; }
-.items-list::-webkit-scrollbar-thumb { background: var(--color-step-5); border-radius: 4px; }
-.items-list::-webkit-scrollbar-thumb:hover { background: var(--text-step-3); }
 
 .action-group-left {
   display: flex;
@@ -218,9 +196,7 @@
   gap: 8px;
 }
 
-.small-num-input {
-  width: 60px !important;
+.small-num-input.option-control {
+  width: 50px;
   text-align: center;
 }
-
-

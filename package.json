@@ -1,13 +1,50 @@
 {
   "name": "nai_tag_manager",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "NAI Tag Manager with Vite + React + Electron",
   "main": "dist-electron/main/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JZ-ZZANG/NTM.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "chcp 65001 && (if exist dist-electron rmdir /s /q dist-electron) && vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build",
+    "dist": "npm run build && electron-builder",
+    "dist:publish": "npm run build && electron-builder --publish always",
     "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.ntm.app",
+    "productName": "NTM",
+    "copyright": "Copyright © 2024",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist",
+      "dist-electron",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "data", "to": "data", "filter": ["**/*"] },
+      { "from": "locales", "to": "locales", "filter": ["**/*"] }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "publish": [{ "provider": "github" }],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "keywords": [],
   "author": "",

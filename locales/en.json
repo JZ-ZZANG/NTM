@@ -1,8 +1,12 @@
 {
   "sideBar": {
     "home": "Home",
+    "tagViewer": "Tag Viewer",
     "tagRemover": "Tag Remover",
-    "wildcard": "Wildcard",
+    "sceneDataGroup": "Scene Data",
+    "randomWeight": "Random Weight",
+    "scenePresetBatch": "Scene Preset Batch",
+    "scenePresetEdit": "Scene Preset Edit",
     "settings": "Settings"
   },
   "titleBar": {
@@ -11,9 +15,112 @@
     "restore": "Restore",
     "close": "Close"
   },
+  "common": {
+    "tagPlaceholder": "Enter tags...",
+    "tag": "Tag",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "warning": "Warning",
+    "electronApiNotLoaded": "Electron API not loaded. Please check preload settings.",
+    "runButton": "Run",
+    "outputDirLabel": "Storage Location",
+    "outputDirPlaceholder": "Select folder to save",
+    "resetInputs": "Reset Inputs",
+    "confirmReset": "Are you sure you want to reset all inputs?",
+    "generateResult": "Save completed.",
+    "saveError": "Error saving file: {{error}}",
+    "collapse": "Collapse",
+    "expand": "Expand"
+  },
   "settings": {
     "title": "Settings",
     "language": "Language",
-    "browse": "Browse..."
+    "browse": "Browse...",
+    "pageInfo": "Manage global application settings."
+  },
+  "tagRemover": {
+    "prefix": "Prefix",
+    "prefixPlaceholder": "e.g., cleaned_",
+    "format": {
+      "label": "File Format",
+      "same": "Same as source",
+      "png": "PNG",
+      "webp": "WebP",
+      "jpg": "JPG"
+    },
+    "conflict": {
+      "label": "Conflict Resolution",
+      "rename": "Rename",
+      "overwrite": "Overwrite",
+      "skip": "Skip"
+    },
+    "output": {
+      "label": "Storage Location",
+      "source": "Source folder",
+      "custom": "Custom"
+    },
+    "dropzone": "Drop files or folders here or click to add",
+    "pageInfo": "Remove tags from image files and save them as new files."
+  },
+  "tagViewer": {
+    "pageInfo": "Check metadata (tags) of images generated with Novel AI.",
+    "metadataTitle": "Image Metadata",
+    "dropzone": "Drop an image here or click to add",
+    "metadataLoading": "Loading metadata...",
+    "metadataError": "Failed to extract metadata.",
+    "noMetadataFound": "This image does not contain\nmetadata",
+    "positivePrompt": "Positive Prompt",
+    "negativePrompt": "Negative Prompt",
+    "charPrompt": "Character Prompt",
+    "settings": "Generation Settings",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "randomWeight": {
+    "title": "Random Weight Combination",
+    "pageInfo": "Generate scene data by randomly placing weights and appearance probabilities.\nSetting the step to 0 calculates weights in increments of 0.01.",
+    "addSet": "+ Add Set",
+    "genCount": "Scene Count",
+    "setName": "Set",
+    "weightRange": "Weight Range / Step",
+    "weightStep": "Step",
+    "applyStepToAll": "Bulk Apply Step",
+    "bulkApplyPlaceholder": "Enter step",
+    "probabilityLabel": "Probability",
+    "tagsPlaceholder": "Enter tags",
+    "removeSet": "Remove Set"
+  },
+  "scenePresetBatch": {
+    "title": "Scene Preset Batch",
+    "pageInfo": "Combine blocks to generate all combinations of scene data.\nYou can specify a scene title by entering a `keyword` at the beginning of a sequential block.",
+    "addFixed": "+ Add Fixed Block",
+    "addSequential": "+ Add Sequential Block",
+    "blockFixed": "Fixed Block",
+    "blockSequential": "Sequential Block",
+    "itemsCount": "{{count}} items",
+    "totalScenes": "Total Combinations: {{count}}",
+    "placeholderFixed": "Enter fixed prompts...",
+    "placeholderSequential": "Enter multiple prompts separated by line breaks (Enter)..."
+  },
+  "scenePresetEdit": {
+    "pageInfo": "Batch edit tags in scene presets.\nTag addition order is based on commas (,).",
+    "emptyMessage": "Drag or click a JSON file to edit.",
+    "itemLabel": "Scene #{{index}}",
+    "findKeyword": "Find",
+    "replaceKeyword": "Replace",
+    "removeModule": "Remove Tags",
+    "replaceModule": "Replace Tags",
+    "addModule": "Batch Add Tags",
+    "insertPosition": "Insert Position",
+    "posFront": "Front",
+    "posBack": "Back",
+    "posNth": "Index",
+    "matchCount": "Matches",
+    "toolboxTitle": "Edit Toolbox",
+    "fileLoaded": "Loaded: {{name}} ({{count}} scenes)",
+    "addTagPlaceholder": "Enter tags to add...",
+    "removeFile": "Remove File",
+    "changeFile": "Change File",
+    "stepIndex": "Step {{index}}"
   }
 }

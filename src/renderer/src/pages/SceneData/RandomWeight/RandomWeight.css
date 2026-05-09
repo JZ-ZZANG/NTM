@@ -1,7 +1,7 @@
 .random-weight-content {
   display: flex;
   flex-direction: column;
-  flex: 1; /* PageContainer의 page-content가 flex-direction: column이므로 */
+  flex: 1;
   min-height: 0;
 }
 
@@ -35,29 +35,8 @@
   flex: 1;
   overflow-y: auto;
   scrollbar-gutter: stable; /* 스크롤바 공간을 미리 예약하여 레이아웃 흔들림 방지 */
-  padding-right: 8px;
-}
-
-/* 스크롤바 전체 영역 스타일 */
-.mix-sets-list::-webkit-scrollbar {
-  width: 8px; /* 스크롤바 너비 */
-}
-
-/* 스크롤바 트랙(배경) 스타일 */
-.mix-sets-list::-webkit-scrollbar-track {
-  background: var(--color-step-1);
-  border-radius: 4px;
-}
-
-/* 스크롤바 핸들(움직이는 부분) 스타일 */
-.mix-sets-list::-webkit-scrollbar-thumb {
-  background: var(--color-step-5);
-  border-radius: 4px;
-}
-
-/* 핸들에 마우스 올렸을 때 스타일 */
-.mix-sets-list::-webkit-scrollbar-thumb:hover {
-  background: var(--text-step-3);
+  padding-right: 8px; /* Keep this for padding */
+  /* Scrollbar styles moved to App.css and applied via .custom-scrollbar */
 }
 
 .set-title {
@@ -110,8 +89,8 @@
   gap: 8px;
 }
 
-.range-inputs input {
-  width: 55px;
+.range-inputs .option-control {
+  width: 50px; 
   text-align: center;
 }
 
@@ -121,30 +100,8 @@
   margin: 0 2px;
 }
 
-.step-input-wrapper {
-  position: relative;
-}
-
-.step-input {
-  width: 55px !important;
-  border-color: var(--color-step-5) !important;
-  color: var(--text-step-2) !important;
-}
-
-.step-input:focus {
-  border-color: var(--point-color) !important;
-}
-
 /* 숫자 입력창 화살표(Spin Button) 제거 */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox 지원 */
-}
+/* Moved to App.css */
 
 .prob-slider {
   width: 100%;
@@ -168,23 +125,25 @@ input[type="number"] {
 .bulk-apply-container {
   display: flex;
   align-items: center;
-  gap: 8px; /* 박스와 아이콘 사이의 간격 */
+  gap: 8px;
 }
 
 .bulk-apply-tool {
   display: flex;
   align-items: center;
   background: var(--color-step-3);
-  padding: 4px;
+  padding: 0 4px;
   border-radius: 6px;
   border: 1px solid var(--color-step-5);
+  height: var(--size-execute-h);
+  box-sizing: border-box;
 }
 
-.bulk-step-input {
-  width: 60px;
-  height: 28px;
-  border: none !important;
-  background: transparent !important;
+.bulk-step-input.option-control {
+  width: 50px;
+  height: 32px;
+  border: 1px solid var(--color-step-5);
+  background-color: var(--color-step-1);
   text-align: center;
 }
 
@@ -193,7 +152,7 @@ input[type="number"] {
   color: var(--text-step-1);
   border: none;
   padding: 0 12px;
-  height: 28px;
+  height: 32px;
   border-radius: 4px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -207,8 +166,8 @@ input[type="number"] {
 }
 
 
-.gen-count-input {
-  width: 70px;
+.gen-count-input.option-control {
+  width: 50px; /* 너비 통일 */
 }
 
 .empty-msg {

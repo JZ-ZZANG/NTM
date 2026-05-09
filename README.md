@@ -1,11 +1,12 @@
 # NTM - NAI Tag Manager
 
-- NTM은 NAIS2 사용자를 위한 작업 보조 데스크톱 애플리케이션입니다.
-- 이 프로그램의 여러 기능은 [NAIS2](https://github.com/sunanakgo/NAIS2)와 함께 사용하는 것을 전제로 설계되었습니다.
+- NTM은 NAI 및 NAIS2 사용자를 위한 작업 보조 데스크톱 애플리케이션입니다.
+- 이 프로그램의 씬 데이터 기능은 [NAIS2](https://github.com/sunanakgo/NAIS2)와 함께 사용하는 것을 전제로 설계되었습니다.
+- 이 프로그램은 생성형 AI로 제작된 리소스를 포함하고 있습니다.
 
 ## 🚀 주요 기능
-### 🖼️ 이미지 일괄 처리
-- NovelAI로 생성한 이미지의 메타데이터(태그) 일괄 제거
+### 🖼️ 이미지 태그 관련
+- NovelAI로 생성한 이미지의 메타데이터(태그) 확인, 복사, 제거
 - 이미지 확장자 일괄 변환
 ### 🎲 씬 프리셋 생성
 - 랜덤 가중치 및 랜덤 출현 태그 씬 프리셋 생성
@@ -54,9 +55,8 @@ NAI_tag_manager/
 ├── resources/                # 앱 패키징 시 필요한 리소스 (아이콘 등)
 ├── locales/                  # 다국어 지원 JSON 파일 (ko.json, en.json, ja.json)
 ├── data/                     # 대용량 정적 데이터 (tags.json 등)
-├── package.json              # 의존성 및 스크립트 설정
+├── package.json              # 의존성 및 스크립트 설정 및 빌드 배포 설정
 ├── vite.config.ts            # Vite 빌드 설정
-├── electron-builder.yml      # Electron 빌드 및 배포 설정
 └── tsconfig.json             # TypeScript 설정
 ```
 
@@ -67,4 +67,5 @@ NAI_tag_manager/
 
 
 ## 🙏 크레딧
+- [novelai-image-metadata](https://github.com/NovelAI/novelai-image-metadata) - Novel Ai 공식 리포지토리. NAI로 생성된 이미지의 태그 관련 로직 참조
 - [NAIS2](https://github.com/sunanakgo/NAIS2) - tags.json 데이터 및 씬 프리셋 json 데이터 구조 참조

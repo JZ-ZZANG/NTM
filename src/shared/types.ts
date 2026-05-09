@@ -29,6 +29,25 @@ export interface PresetBlock {
   content: string; // 텍스트 내용 (순차 블록의 경우 줄바꿈으로 구분)
 }
 
+/**
+ * Electron API 타입 정의
+ */
+declare global {
+  interface Window {
+    electronAPI: {
+      minimize: () => void;
+      maximize: () => void;
+      close: () => void;
+      isMaximized: () => Promise<boolean>;
+      onMaximizedChange: (callback: (maximized: boolean) => void) => () => void;
+      selectDirectory: () => Promise<string | null>;
+      saveJsonFile: (args: { path: string; fileName: string; data: any }) => Promise<{ success: boolean }>;
+      suggestTags: (keyword: string) => Promise<Tag[]>;
+      extractImageMetadata: (imagePath: string) => Promise<any>;
+    };
+  }
+}
+
 export interface AppSettings {
   language: 'ko' | 'en' | 'ja';
   theme: 'dark' | 'light' | 'system';

@@ -23,7 +23,7 @@ const TagRemover: React.FC = () => {
     setIsTagRemoving
   } = useAppStore();
 
-  const { outputMode, outputDir, prefix, conflictResolution, outputFormat } = settings.tagremover;
+  const { outputMode, outputDir, prefix, conflictResolution, outputFormat } = settings.tagRemover;
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const imageRegex = /\.(jpe?g|png|webp)$/i;
@@ -65,7 +65,7 @@ const TagRemover: React.FC = () => {
     });
 
     try {
-      await window.electronAPI?.startTagRemoval(items, settings.tagremover);
+      await window.electronAPI?.startTagRemoval(items, settings.tagRemover);
       
       // 작업 완료 후 리스트 및 진행 상황 초기화
       setItems([]);
@@ -105,7 +105,7 @@ const TagRemover: React.FC = () => {
               <label>{t('tagRemover.prefix')}</label>
               <input 
                 type="text" 
-                className="option-control w-fixed"
+                className="option-control"
                 value={prefix} 
                 onChange={(e) => updateTagRemoverSettings({ prefix: e.target.value })}
                 placeholder={t('tagRemover.prefixPlaceholder')}
@@ -115,7 +115,7 @@ const TagRemover: React.FC = () => {
             <div className="option-group">
               <label>{t('tagRemover.conflict.label')}</label>
               <select 
-                className="option-control w-fixed"
+                className="option-control"
                 value={conflictResolution}
                 onChange={(e) => updateTagRemoverSettings({ conflictResolution: e.target.value as any })}
               >
@@ -128,7 +128,7 @@ const TagRemover: React.FC = () => {
             <div className="option-group">
               <label>{t('tagRemover.format.label')}</label>
               <select 
-                className="option-control w-fixed"
+                className="option-control"
                 value={outputFormat}
                 onChange={(e) => updateTagRemoverSettings({ outputFormat: e.target.value as any })}
               >
@@ -173,7 +173,7 @@ const TagRemover: React.FC = () => {
                   disabled={outputMode === 'source'}
                   placeholder="C:\Exports\..." 
                 />
-                <button 
+                <button className="btn-browse" 
                   onClick={handleBrowse} 
                   disabled={outputMode === 'source'}
                 >

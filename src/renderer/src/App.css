@@ -98,7 +98,7 @@ html, body, #root {
 .menu-group {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* 부모인 sidebar와 동일한 간격 유지 */
+  gap: 4px;
 }
 
 .menu-group-header {
@@ -125,12 +125,12 @@ html, body, #root {
 .menu-sub-items::before {
   content: '';
   position: absolute;
-  left: 14px; /* 들여쓰기된 항목의 왼쪽에 위치 (sidebar padding 8px + menu-group-header padding 12px = 20px) */
+  left: 14px; 
   top: 0;
-  height: 100%; /* 부모 요소의 전체 높이만큼 선을 그림 */
-  width: 2px; /* 선의 두께 */
-  background-color: var(--text-step-2); /* 테마 색상에 맞춰 조절 */
-  border-radius: 1px; /* 선의 끝을 부드럽게 처리 */
+  height: 100%; 
+  width: 2px; 
+  background-color: var(--text-step-2); 
+  border-radius: 1px;
 }
 
 .sidebar a {
@@ -146,7 +146,7 @@ html, body, #root {
 }
 
 .menu-sub-items a {
-  padding-left: 28px; /* 기본 12px + 들여쓰기 16px */
+  padding-left: 28px;
 }
 
 .sidebar a:hover { background: var(--color-step-3); }
@@ -166,15 +166,15 @@ html, body, #root {
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  padding: 10px 15px 15px; /* 상단 여백 대폭 축소, 좌우 여백 조정 */
+  padding: 10px 15px 15px;
 }
 
 .page-header {
-  margin-bottom: 15px; /* 제목과 컨텐츠 사이 간격 축소 */
+  margin-bottom: 15px;
 }
 
 .page-header h2 {
-  font-size: 1.8rem; /* 제목 크기 */
+  font-size: 1.8rem;
   color: var(--text-step-1);
   margin: 0;
   display: flex;
@@ -216,6 +216,14 @@ html, body, #root {
   min-height: 0;
 }
 
+/* 설정 페이지 전용 콘텐츠 영역 여백 */
+.settings-content {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 /* 진행 바 공통 규격 */
 .progress-container {
   flex: 1;
@@ -225,7 +233,7 @@ html, body, #root {
   border-radius: 4px;
   position: relative;
   overflow: hidden;
-  box-sizing: border-box; /* 높이 42px에 테두리 포함 */
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,7 +298,7 @@ html, body, #root {
   font-size: 0.85rem;
   color: var(--text-step-2);
   white-space: nowrap;
-  line-height: 1; /* 텍스트 높이 고정 */
+  line-height: 1;
 }
 
 /* 메인 실행 버튼 (Job Button) 규격 통일 */
@@ -336,15 +344,6 @@ html, body, #root {
   max-width: 600px;
 }
 
-.path-picker {
-  display: flex;
-  gap: 4px;
-}
-
-.path-picker input {
-  width: 200px;
-}
-
 .btn-browse {
   height: var(--size-control-h);
   padding: 0 12px;
@@ -355,11 +354,89 @@ html, body, #root {
   cursor: pointer;
   font-size: 0.85rem;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-.btn-browse:hover {
+.btn-browse:hover:not(:disabled) {
   background-color: var(--color-step-4);
   color: var(--text-step-1);
+}
+
+
+.option-control:disabled,
+.btn-browse:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Dropzone 공통 */
+.dropzone {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--color-step-5);
+  border-radius: 12px;
+  background-color: var(--color-step-1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: var(--text-step-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone.active {
+  border-color: var(--point-color);
+  background-color: var(--color-step-4);
+  color: var(--point-color);
+}
+
+.dropzone:hover {
+  background-color: var(--color-step-3);
+  border-color: var(--color-step-5);
+  color: var(--text-step-2);
+}
+
+/* 스크롤바 공통 규격 */
+/* 스크롤바 전체 영역 스타일 */
+::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+}
+
+/* 스크롤바 트랙(배경) 스타일 */
+::-webkit-scrollbar-track {
+  background: var(--color-step-1);
+  border-radius: 4px;
+}
+
+/* 스크롤바 핸들(움직이는 부분) 스타일 */
+::-webkit-scrollbar-thumb {
+  background: var(--color-step-5);
+  border-radius: 4px;
+}
+
+/* 핸들에 마우스 올렸을 때 스타일 */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-step-3);
+}
+
+/* 숫자 입력창 화살표(Spin Button) 제거 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 지원 */
+}
+
+/* path-picker input width adjustment */
+.path-picker .option-control {
+  flex-grow: 1;
+  width: auto; /* Override default width */
 }
 
 /* 큰 사이즈의 btn-secondary (예: 추가 버튼) */
@@ -411,4 +488,49 @@ html, body, #root {
   background-color: var(--color-step-5);
   color: var(--text-step-3);
   cursor: not-allowed;
+}
+
+/* --- 공용 디자인 요소 (Common Design Elements) --- */
+
+/* 범용 폼 레이블 */
+.form-label {
+  color: var(--text-step-2);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap; /* 라벨이 줄바꿈되지 않도록 */
+}
+
+/* 페이지 공통 옵션 컨트롤 스타일 */
+.option-control {
+  height: var(--size-control-h);
+  background-color: var(--color-step-1) !important;
+  border: 1px solid var(--color-step-5);
+  color: var(--text-step-1) !important; 
+  padding: 0 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.option-control::placeholder {
+  color: var(--text-step-3);
+}
+
+.option-control:focus {
+  border-color: var(--text-step-3);
+  color: var(--text-step-1) !important;
+  background-color: var(--color-step-3) !important;
+}
+
+/* 폼 행 내부의 컨트롤 규격 */
+.form-row .option-control {
+  width: 200px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }

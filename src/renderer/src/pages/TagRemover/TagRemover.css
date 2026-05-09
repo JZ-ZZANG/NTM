@@ -23,31 +23,15 @@
   gap: 20px;
 }
 
-/* 공통 입력 컨트롤 스타일 */
-.option-control {
-  height: var(--size-control-h);
-  background-color: var(--color-step-1);
-  border: 1px solid var(--color-step-5);
-  color: var(--text-step-2);
-  padding: 0 10px;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.option-control:focus {
-  border-color: var(--point-color);
-}
-
-.w-fixed {
-  width: 200px;
-}
-
 .option-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 200px;
+}
+
+.option-group .option-control {
+  width: 200px; /* 일정한 너비 유지 */
 }
 
 .path-input-group {
@@ -61,19 +45,16 @@
   font-weight: 600;
 }
 
+.path-input-group .option-control {
+  width: 100%; /* 경로 입력창은 가변 */
+}
+
 .radio-group {
   display: flex;
   gap: 15px;
+  width: 200px;
   height: 32px;
   align-items: center;
-}
-
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  color: var(--text-step-1);
 }
 
 .path-picker {
@@ -81,61 +62,6 @@
   gap: 5px;
 }
 
-.path-picker input {
-  flex-grow: 1;
-}
-
-.path-picker button {
-  height: var(--size-control-h);
-  padding: 0 15px;
-  background-color: var(--color-step-3);
-  border: 1px solid var(--color-step-5);
-  color: var(--text-step-2);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.path-picker button:hover:not(:disabled) {
-  background-color: var(--color-step-4);
-  color: var(--text-step-1);
-}
-
-.path-picker input:disabled,
-.path-picker button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.dropzone {
-  flex: 1; /* 설정 영역과 버튼 영역을 제외한 중간의 모든 빈 공간을 차지 */
-  min-height: 0; /* flex 아이템이 내용물보다 커지지 않도록 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed var(--color-step-5);
-  border-radius: 12px;
-  background-color: var(--color-step-1);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  color: var(--text-step-3);
-  position: relative;
-  overflow: hidden;
-}
-
-.dropzone.active {
-  border-color: var(--point-color);
-  background-color: var(--color-step-4);
-  color: var(--point-color);
-}
-
-.dropzone:hover {
-  background-color: var(--color-step-3);
-  border-color: var(--color-step-5);
-  color: var(--text-step-2);
-}
 
 
 .file-list-overlay {
@@ -171,26 +97,6 @@
   text-align: left;
   pointer-events: auto;
   user-select: none; /* 리스트 텍스트 선택 방지 */
-}
-
-/* 드롭존 내부 커스텀 스크롤바 */
-.file-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.file-list::-webkit-scrollbar-track {
-  background: transparent; /* 트랙 배경을 투명하게 설정 */
-}
-
-.file-list::-webkit-scrollbar-thumb {
-  background: var(--color-step-5);
-  border-radius: 4px;
-  border: 2px solid transparent; /* 투명 배경 위에서 살짝 떠 있는 느낌을 줌 */
-  background-clip: padding-box;
-}
-
-.file-list::-webkit-scrollbar-thumb:hover {
-  background-color: var(--text-step-3);
 }
 
 .file-list li {

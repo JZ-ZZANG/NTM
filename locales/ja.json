@@ -1,8 +1,12 @@
 {
   "sideBar": {
     "home": "ホーム",
+    "tagViewer": "タグビューアー",
     "tagRemover": "タグ削除",
-    "wildcard": "ワイルドカード",
+    "sceneDataGroup": "シーンデータ",
+    "randomWeight": "ランダム重み生成",
+    "scenePresetBatch": "プリセット一괄生成",
+    "scenePresetEdit": "プリセット編集",
     "settings": "設定"
   },
   "titleBar": {
@@ -11,11 +15,112 @@
     "restore": "元に戻す",
     "close": "閉じる"
   },
+  "common": {
+    "tagPlaceholder": "タグを入力...",
+    "tag": "タグ",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "warning": "警告",
+    "electronApiNotLoaded": "Electron APIがロードされていません。Preload設定を確認してください。",
+    "runButton": "作業開始",
+    "outputDirLabel": "保存先",
+    "outputDirPlaceholder": "保存するフォルダを選択",
+    "resetInputs": "入力初期化",
+    "confirmReset": "すべての入力を初期化しますか？",
+    "generateResult": "保存が完了しました。",
+    "saveError": "ファイル保存中にエラーが発生しました: {{error}}",
+    "collapse": "閉じる",
+    "expand": "展開"
+  },
   "settings": {
     "title": "設定",
     "language": "言語設定",
-    "langKo": "韓国語",
-    "langEn": "英語",
-    "langJa": "日本語"
+    "browse": "参照...",
+    "pageInfo": "アプリケーションのグローバル設定を管理します。"
+  },
+  "tagRemover": {
+    "prefix": "接頭辞",
+    "prefixPlaceholder": "例: cleaned_",
+    "format": {
+      "label": "ファイル形式",
+      "same": "オリジナルと同じ",
+      "png": "PNG",
+      "webp": "WebP",
+      "jpg": "JPG"
+    },
+    "conflict": {
+      "label": "重複時の処理",
+      "rename": "名前変更",
+      "overwrite": "上書き",
+      "skip": "スキップ"
+    },
+    "output": {
+      "label": "保存先",
+      "source": "元のフォルダ",
+      "custom": "ユーザー指定"
+    },
+    "dropzone": "ファイルまたはフォルダをドロップするかクリックして追加してください",
+    "pageInfo": "画像ファイルからタグを削除し、新しいファイルとして保存します。"
+  },
+  "tagViewer": {
+    "pageInfo": "Novel AIで生成した画像ファイルのメタデータを確認します。",
+    "metadataTitle": "画像メタデータ",
+    "dropzone": "画像をドロップするかクリックして追加してください",
+    "metadataLoading": "メタデータを読み込んでいます...",
+    "metadataError": "メタデータの抽出に失敗しました。",
+    "noMetadataFound": "この画像にはメタデータが\n含まれていません",
+    "positivePrompt": "肯定プロンプト",
+    "negativePrompt": "否定プロンプト",
+    "charPrompt": "キャラクタープロンプト",
+    "settings": "生成設定",
+    "copy": "コピー",
+    "copied": "コピー完了!"
+  },
+  "randomWeight": {
+    "title": "ランダム重み組み合せ生成",
+    "pageInfo": "重みと出現確率をランダムに配置してシーンデータを生成します。\n単位を0に設定すると、デフォルト値の0.01単位で重みが計算されます。",
+    "addSet": "+ セット追加",
+    "genCount": "シーン生成数",
+    "setName": "セット",
+    "weightRange": "重み範囲 / 単位",
+    "weightStep": "単位",
+    "applyStepToAll": "単位一括適用",
+    "bulkApplyPlaceholder": "単位入力",
+    "probabilityLabel": "含有確率",
+    "tagsPlaceholder": "タグを入力してください",
+    "removeSet": "セット削除"
+  },
+  "scenePresetBatch": {
+    "title": "シーンプリセット組合せ生成",
+    "pageInfo": "各ブロックを組み合わせて、すべての組み合わせをシーンデータとして生成します。\n順次ブロックの最初に`キーワード`を入力することで、シーンのタイトルを指定できます。",
+    "addFixed": "+ 固定ブロック追加",
+    "addSequential": "+ 順次ブロック追加",
+    "blockFixed": "固定ブロック",
+    "blockSequential": "順次ブロック",
+    "itemsCount": "{{count}}個の項目",
+    "totalScenes": "総組合せ数: {{count}}",
+    "placeholderFixed": "固定プロンプト入力...",
+    "placeholderSequential": "改行(Enter)で区切って複数のプロンプトを入力..."
+  },
+  "scenePresetEdit": {
+    "pageInfo": "プリセットのタグを一括編集できます。\nタグ追加の順序はコンマ(,)基準です。",
+    "emptyMessage": "修正するJSONファイルをドラッグまたはクリックして選択してください。",
+    "itemLabel": "シーン #{{index}}",
+    "findKeyword": "検索ワード",
+    "replaceKeyword": "置換ワード",
+    "removeModule": "タグ削除",
+    "replaceModule": "タグ置換",
+    "addModule": "タグ一括追加",
+    "insertPosition": "追加位置",
+    "posFront": "前から",
+    "posBack": "後ろから",
+    "posNth": "番目",
+    "matchCount": "個一致",
+    "toolboxTitle": "編集ツールボックス",
+    "fileLoaded": "ロード済み: {{name}} ({{count}}個のシーン)",
+    "addTagPlaceholder": "追加するタグを入力...",
+    "removeFile": "ファイル削除",
+    "changeFile": "ファイル変更",
+    "stepIndex": "ステップ {{index}}"
   }
 }

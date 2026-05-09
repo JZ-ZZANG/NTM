@@ -332,6 +332,7 @@ const RandomWeight: React.FC = () => {
                     step="0.01" 
                     value={bulkStep} 
                     onChange={(e) => setBulkStep(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
                     className="option-control bulk-step-input"
                     placeholder={t('randomWeight.bulkApplyPlaceholder')}
                   />

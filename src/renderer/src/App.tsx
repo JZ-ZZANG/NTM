@@ -4,6 +4,7 @@ import TitleBar from './components/layout/TitleBar';
 import SideBar from './components/layout/SideBar';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
+import TagViewer from './pages/TagViewer';
 import TagRemover from './pages/TagRemover';
 import RandomWeight from './pages/SceneData/RandomWeight';
 import ScenePresetBatch from './pages/SceneData/ScenePresetBatch';
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           <main className="content">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/tag-viewer" element={<TagViewer />} />
               <Route path="/tag-remover" element={<TagRemover />} />
               <Route path="/random-weight" element={<RandomWeight />} />
               <Route path="/scene-preset-batch" element={<ScenePresetBatch />} />

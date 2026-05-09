@@ -8,27 +8,9 @@
 .blocks-list {
   flex: 1;
   overflow-y: auto;
-  scrollbar-gutter: stable;
-  padding-right: 8px;
-}
-
-/* 스크롤바 스타일 통일 (RandomWeight와 동일) */
-.blocks-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.blocks-list::-webkit-scrollbar-track {
-  background: var(--color-step-1);
-  border-radius: 4px;
-}
-
-.blocks-list::-webkit-scrollbar-thumb {
-  background: var(--color-step-5);
-  border-radius: 4px;
-}
-
-.blocks-list::-webkit-scrollbar-thumb:hover {
-  background: var(--text-step-3);
+  scrollbar-gutter: stable; /* Keep this */
+  padding-right: 8px; /* Keep this */
+  /* Scrollbar styles moved to App.css and applied via .custom-scrollbar */
 }
 
 .preset-block-card {

@@ -10,7 +10,7 @@ interface Task {
 }
 
 export class ImageService {
-  private static async buildFolderTasks(dir: string, baseDir: string, destRoot: string, settings: AppSettings['tagremover']): Promise<Task[]> {
+  private static async buildFolderTasks(dir: string, baseDir: string, destRoot: string, settings: AppSettings['tagRemover']): Promise<Task[]> {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     let tasks: Task[] = [];
     
@@ -48,7 +48,7 @@ export class ImageService {
 
   static async processTagRemoval(
     items: { name: string, path: string }[],
-    settings: AppSettings['tagremover'],
+    settings: AppSettings['tagRemover'],
     onProgress: (progress: ProcessProgress) => void
   ) {
     const tasks: Task[] = [];

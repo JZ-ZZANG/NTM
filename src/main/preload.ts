@@ -24,6 +24,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // Tag Suggestion
   suggestTags: (keyword: string) => ipcRenderer.invoke('suggest-tags', keyword),
+
+  // NAI Metadata Extraction
+  extractImageMetadata: (imagePath: string) => ipcRenderer.invoke('extract-image-metadata', imagePath),
 });
 
 console.log('>>> [Preload] electronAPI exposed successfully');

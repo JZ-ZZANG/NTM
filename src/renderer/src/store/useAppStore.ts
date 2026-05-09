@@ -31,7 +31,7 @@ interface AppState {
 
   setLanguage: (lang: AppSettings['language']) => void;
   setTheme: (theme: AppSettings['theme']) => void;
-  updateTagRemoverSettings: (updates: Partial<AppSettings['tagremover']>) => void;
+  updateTagRemoverSettings: (updates: Partial<AppSettings['tagRemover']>) => void;
   updateRandomWeightSettings: (updates: { outputDir: string }) => void;
   updateScenePresetSettings: (updates: { outputDir: string }) => void;
   setTagRemoverItems: (items: { name: string; path: string }[]) => void;
@@ -53,7 +53,7 @@ export const useAppStore = create<AppState>()(persist((set) => ({
   settings: {
     language: 'ko',
     theme: 'system',
-    tagremover: {
+    tagRemover: {
       outputMode: 'source',
       outputDir: '',
       outputFormat: 'same',
@@ -80,7 +80,7 @@ export const useAppStore = create<AppState>()(persist((set) => ({
   updateTagRemoverSettings: (updates) => set((state) => ({
     settings: {
       ...state.settings,
-      tagremover: { ...state.settings.tagremover, ...updates }
+      tagRemover: { ...state.settings.tagRemover, ...updates }
     }
   })),
   updateRandomWeightSettings: (updates) => set((state) => ({
@@ -137,6 +137,10 @@ export const useAppStore = create<AppState>()(persist((set) => ({
       scenePreset: {
         ...currentState.settings.scenePreset,
         ...((persistedState as any).settings?.scenePreset || {}),
+      },
+      tagRemover: {
+        ...currentState.settings.tagRemover,
+        ...((persistedState as any).settings?.tagRemover || (persistedState as any).settings?.tagremover || {}),
       },
       scenePresetEdit: { // scenePresetEdit 설정도 깊게 병합
         ...currentState.settings.scenePresetEdit,

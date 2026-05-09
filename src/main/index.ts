@@ -2,11 +2,17 @@ import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import sharp from 'sharp';
 import { ImageService } from './services/imageService';
+import { NaimetaService } from './services/naimetaService';
 import { TagService } from './services/tagService';
 
 // ESM 환경에서 __dirname 정의
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// sharp의 파일 캐시 기능을 전역적으로 비활성화합니다.
+// 이 설정이 있어야 Windows에서 이미지를 읽은 후 파일 잠금이 즉시 해제됩니다.
+sharp.cache(false);
 
 function createWindow() {
   const preloadPath = path.resolve(__dirname, '../preload/preload.cjs');
@@ -96,6 +102,18 @@ ipcMain.handle('save-json-file', async (_event, { path: dirPath, fileName, data 
 // 태그 자동완성 제안 핸들러
 ipcMain.handle('suggest-tags', async (_event, keyword) => {
   return await TagService.suggestTags(keyword);
+});
+
+ipcMain.handle('extract-image-metadata', async (_event, imagePath: string) => {
+  try {
+    const result = await NaimetaService.extractStealthMetadata(imagePath);
+    // 태그 추출이 정상적으로 이루어지는지 콘솔 확인용
+    // console.log('>>> [Main] Extracted metadata:', JSON.stringify(result, null, 2));
+    return result;
+  } catch (error) {
+    // Stealth 메타데이터가 없는 경우 등 에러 발생 시 null 반환하여 프론트에서 처리 유도
+    return null;
+  }
 });
 
 app.whenReady().then(createWindow);
