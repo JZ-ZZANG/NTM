@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -39,6 +39,12 @@ function createWindow() {
   } else {
     mainWindow.loadFile(path.resolve(__dirname, '../../dist/index.html'));
   }
+
+  // 외부 링크(target="_blank") 요청 시 시스템 기본 브라우저로 연결
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' }; // 새 일렉트론 창이 뜨는 것을 방지
+  });
 
   // 창 상태 변경 감시 및 전달
   mainWindow.on('maximize', () => mainWindow.webContents.send('window-maximized-status', true));

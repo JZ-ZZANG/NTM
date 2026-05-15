@@ -1,0 +1,243 @@
+/* 루트 */
+.td-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+}
+
+.td-panels {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 패널 */
+.td-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+/* 구분선 */
+.td-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 16px;
+  gap: 8px;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.td-divider-line {
+  flex: 1;
+  width: 1px;
+  background-color: var(--color-step-5);
+}
+
+.td-divider-icon {
+  font-size: 0.9rem;
+  color: var(--text-step-3);
+  user-select: none;
+}
+
+/* 드롭존 - 색상/트랜지션은 App.css .dropzone 전역 스타일을 따름 */
+.td-dropzone {
+  flex: 1;
+  min-height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.td-dropzone-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.td-dropzone-hint {
+  font-size: 0.82rem;
+  color: var(--text-step-3);
+  margin: 0;
+  text-align: center;
+}
+
+/* 이미지 프리뷰 */
+.td-image-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.td-preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-step-1), transparent 50%);
+}
+
+.td-preview-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: color-mix(in srgb, var(--color-step-1), transparent 30%);
+  padding: 5px 10px;
+  backdrop-filter: blur(4px);
+}
+
+.td-preview-filename {
+  color: var(--text-step-1);
+  font-size: 0.78rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Raw Data 박스 */
+.td-raw-box {
+  flex: 3;
+  min-height: 0;
+  background-color: var(--color-step-2);
+  border: 1px solid var(--color-step-5);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.td-raw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-step-5);
+  flex-shrink: 0;
+}
+
+.td-raw-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--point-color);
+  border-left: 3px solid var(--point-color);
+  padding-left: 8px;
+}
+
+.td-raw-content {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+/* 코드 블록 & 줄 */
+.td-code-block {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.td-code-line {
+  display: table-row;
+}
+
+.td-code-line:hover .td-line-num {
+  background-color: var(--color-step-4);
+}
+
+/* 줄 번호 */
+.td-line-num {
+  display: table-cell;
+  width: 40px;
+  min-width: 40px;
+  padding: 0 10px 0 8px;
+  text-align: right;
+  color: var(--text-step-3);
+  background-color: var(--color-step-3);
+  user-select: none;
+  border-right: 1px solid var(--color-step-5);
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+/* 줄 텍스트 */
+.td-line-text {
+  display: table-cell;
+  padding: 0 12px;
+  color: var(--text-step-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+  vertical-align: top;
+}
+
+/* diff 상태별 배경색 */
+
+/* 값이 다름 - 분홍/연빨 */
+.td-line-different .td-line-num {
+  background-color: color-mix(in srgb, #e05c5c, transparent 72%);
+  color: color-mix(in srgb, #e05c5c, var(--text-step-3) 40%);
+}
+.td-line-different .td-line-text {
+  background-color: color-mix(in srgb, #e05c5c, transparent 88%);
+}
+
+/* 한쪽에만 존재 - 민트/초록 */
+.td-line-only .td-line-num {
+  background-color: color-mix(in srgb, #3dba7e, transparent 68%);
+  color: color-mix(in srgb, #3dba7e, var(--text-step-3) 40%);
+}
+.td-line-only .td-line-text {
+  background-color: color-mix(in srgb, #3dba7e, transparent 86%);
+}
+
+/* 상태 바 */
+.td-statusbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: var(--text-step-2);
+  flex-shrink: 0;
+  padding: 2px 0;
+}
+
+.td-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.td-status-dot.diff {
+  background-color: #e05c5c;
+}
+
+.td-status-dot.same {
+  background-color: #3dba7e;
+}
+
+/* 공통 */
+.empty-placeholder {
+  color: var(--text-step-3);
+  font-size: 0.85rem;
+  padding: 12px;
+  display: block;
+}

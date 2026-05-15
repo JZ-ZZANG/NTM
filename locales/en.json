@@ -2,8 +2,9 @@
   "sideBar": {
     "home": "Home",
     "tagViewer": "Tag Viewer",
+    "tagDiff": "Tag Diff",
     "tagRemover": "Tag Remover",
-    "sceneDataGroup": "Scene Data",
+    "sceneDataGroup": "▶ Scene Data",
     "randomWeight": "Random Weight",
     "scenePresetBatch": "Scene Preset Batch",
     "scenePresetEdit": "Scene Preset Edit",
@@ -31,6 +32,10 @@
     "saveError": "Error saving file: {{error}}",
     "collapse": "Collapse",
     "expand": "Expand"
+  },
+  "home": {
+    "title": "NTM - NAI Tag Manager",
+    "description": "NAI Tag Manager is a supporting tool for NAI users.\n\n[Features]\n1. Tag Viewer: View metadata of image files.\n2. Tag Diff: Compare generation metadata between two images.\n3. Tag Remover: Remove embedded metadata from images. Supports batch processing by folder.\n4. Scene Data: Features under the Scene Data group are for NAIS2's Scene Mode.\n  4.1. Random Weight: Generate presets by specifying weight ranges and appearance probabilities for tag groups.\n  4.2. Scene Preset Batch: Generate presets containing all possible combinations of scenes.\n  4.3. Scene Preset Edit: Batch remove, replace, or insert tags within scene presets."
   },
   "settings": {
     "title": "Settings",
@@ -75,6 +80,13 @@
     "settings": "Generation Settings",
     "copy": "Copy",
     "copied": "Copied!"
+  },
+  "tagDiff": {
+    "pageInfo": "Compare metadata information between two images.",
+    "statusDiff": "There are {{count}} differences",
+    "statusSame": "The two images are identical",
+    "rawDataA": "Image A",
+    "rawDataB": "Image B"
   },
   "randomWeight": {
     "title": "Random Weight Combination",

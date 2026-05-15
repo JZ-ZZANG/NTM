@@ -2,10 +2,11 @@
   "sideBar": {
     "home": "ホーム",
     "tagViewer": "タグビューアー",
+    "tagDiff": "タグ比較",
     "tagRemover": "タグ削除",
-    "sceneDataGroup": "シーンデータ",
+    "sceneDataGroup": "▶ シーンデータ",
     "randomWeight": "ランダム重み生成",
-    "scenePresetBatch": "プリセット一괄生成",
+    "scenePresetBatch": "プリセット一括生成",
     "scenePresetEdit": "プリセット編集",
     "settings": "設定"
   },
@@ -31,6 +32,10 @@
     "saveError": "ファイル保存中にエラーが発生しました: {{error}}",
     "collapse": "閉じる",
     "expand": "展開"
+  },
+  "home": {
+    "title": "NTM - NAI Tag Manager",
+    "description": "NAI Tag Managerは、NAIユーザーのための補助作業ツールです。\n\n[機能]\n1. タグビューアー: 画像ファイルのメタデータを閲覧します。\n2. タグ比較: 2つの画像の生成メタデータを比較します。\n3. タグ削除: 画像に内蔵されたメタデータを削除します。フォルダ単位での作業が可能です。\n4. シーンデータ: シーンデータグループの機能は、NAIS2のシーンモードのための機能です。\n  4.1. ランダム重み生成: タググループ別の重み範囲、出現確率を指定してプリセットを生成します。\n  4.2. プリセット一括生成: すべての組み合わせのシーンが含まれたプリセットを生成します。\n  4.3. プリセット編集: シーンプリセット内のタグを一括削除、置換、挿入できます。"
   },
   "settings": {
     "title": "設定",
@@ -75,6 +80,13 @@
     "settings": "生成設定",
     "copy": "コピー",
     "copied": "コピー完了!"
+  },
+  "tagDiff": {
+    "pageInfo": "2つの画像のメタデータ情報を比較します。",
+    "statusDiff": "{{count}}個の差異があります",
+    "statusSame": "2つの画像は同一です",
+    "rawDataA": "画像 A",
+    "rawDataB": "画像 B"
   },
   "randomWeight": {
     "title": "ランダム重み組み合せ生成",

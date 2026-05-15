@@ -39,22 +39,39 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-const MetadataSection: React.FC<{ title: string; content?: string; children?: React.ReactNode }> = ({ title, content, children }) => {
+const MetadataSection: React.FC<{
+  title: string;
+  content?: string;
+  children?: React.ReactNode;
+  collapsible?: boolean;
+}> = ({ title, content, children, collapsible = false }) => {
+  const [isOpen, setIsOpen] = useState(!collapsible);
+
   return (
     <div className="metadata-section">
-      <h4>{title}</h4>
-      <div className="metadata-content-box">
-        {content !== undefined ? (
-          <div className="sub-section">
-            <div className="sub-section-header no-label">
-              <CopyButton text={content} />
+      <h4
+        className={collapsible ? 'collapsible-header' : ''}
+        onClick={collapsible ? () => setIsOpen(prev => !prev) : undefined}
+      >
+        {title}
+        {collapsible && (
+          <span className={`collapsible-arrow ${isOpen ? 'open' : ''}`}>▼</span>
+        )}
+      </h4>
+      {(!collapsible || isOpen) && (
+        <div className="metadata-content-box">
+          {content !== undefined ? (
+            <div className="sub-section">
+              <div className="sub-section-header no-label">
+                <CopyButton text={content} />
+              </div>
+              <div className="sub-text">
+                {content || <span className="empty-placeholder">—</span>}
+              </div>
             </div>
-            <div className="sub-text">
-              {content || <span className="empty-placeholder">—</span>}
-            </div>
-          </div>
-        ) : children}
-      </div>
+          ) : children}
+        </div>
+      )}
     </div>
   );
 };
@@ -148,11 +165,8 @@ const TagViewer: React.FC = () => {
       Source: source,
     } : {};
 
-    const settingsText = Object.entries(settings)
-      .map(([k, v]) => `${k}: ${v}`)
-      .join(', ');
-
     const charCount = Math.max(charCaptions.length, charNegCaptions.length, 1);
+    const rawJson = data ? JSON.stringify(data, null, 2) : '';
 
     return (
       <div className="metadata-display">
@@ -199,6 +213,18 @@ const TagViewer: React.FC = () => {
                 <span className="setting-value">{String(val)}</span>
               </div>
             ))}
+          </div>
+        </MetadataSection>
+
+        {/* 5. 전체 원본 JSON 데이터 (접기/펼치기) */}
+        <MetadataSection title={t('tagViewer.rawData')} collapsible>
+          <div className="sub-section">
+            <div className="sub-section-header no-label">
+              <CopyButton text={rawJson} />
+            </div>
+            <div className="sub-text">
+              {rawJson || <span className="empty-placeholder">—</span>}
+            </div>
           </div>
         </MetadataSection>
       </div>

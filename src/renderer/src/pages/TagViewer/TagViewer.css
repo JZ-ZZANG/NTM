@@ -232,3 +232,20 @@
   text-overflow: ellipsis;
   max-width: 90%; /* Prevent overflow */
 }
+
+.metadata-section h4.collapsible-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.collapsible-arrow {
+  margin-left: 6px;
+  font-size: 0.7rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+  transform: rotate(0deg);
+}
+
+.collapsible-arrow.open {
+  transform: rotate(-180deg);
+}

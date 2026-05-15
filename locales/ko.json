@@ -2,8 +2,9 @@
   "sideBar": {
     "home": "홈",
     "tagViewer": "태그 뷰어",
+    "tagDiff": "태그 비교",
     "tagRemover": "태그 제거",
-    "sceneDataGroup": "씬 데이터",
+    "sceneDataGroup": "▶ 씬 데이터",
     "randomWeight": "랜덤 가중치 조합 생성",
     "scenePresetBatch": "씬 프리셋 일괄 생성",
     "scenePresetEdit": "씬 프리셋 편집",
@@ -31,6 +32,10 @@
     "saveError": "파일 저장 중 오류가 발생했습니다: {{error}}",
     "collapse": "접기",
     "expand": "펼치기"
+  },
+  "home": {
+    "title": "NTM - NAI Tag Manager",
+    "description": "NAI Tag Manager는 NAI 사용자를 위한 보조 작업 툴입니다.\n\n[기능]\n1. 태그 뷰어: 이미지 파일의 메타데이터를 열람합니다.\n2. 태그 비교: 두 이미지의 생성 메타데이터를 비교합니다.\n3. 태그 제거: 이미지에 내장된 메타데이터를 제거합니다. 폴더 단위로 작업 가능합니다.\n4. 씬 데이터: 씬 데이터 그룹의 기능은 NAIS2의 씬 모드를 위한 기능입니다.\n  4.1. 랜덤 가중치 조합 생성: 태그 그룹별 가중치 범위, 등장확률을 지정하여 프리셋을 생성합니다.\n  4.2. 씬 프리셋 일괄 생성: 모든 조합의 씬이 들어간 프리셋을 생성합니다.\n  4.3. 씬 프리셋 편집: 씬 프리셋 내 태그를 일괄 제거,대체,삽입 할 수 있습니다."
   },
   "settings": {
     "title": "설정",
@@ -60,10 +65,10 @@
       "custom": "사용자 지정"
     },
     "dropzone": "파일 또는 폴더를 드롭 하거나 클릭하여 추가하세요",
-    "pageInfo": "이미지 파일에서 태그를 제거하고 새로운 파일로 저장합니다."
+    "pageInfo": "이미지 파일에서 메타데이터를 제거하고 새로운 파일로 저장합니다."
   },
   "tagViewer": {
-    "pageInfo": "Novel AI로 생성한 이미지 파일의 메타데이터를 확인합니다.",
+    "pageInfo": "Novel AI로 생성한 이미지 파일의 메타데이터 정보를 확인합니다.",
     "metadataTitle": "이미지 메타데이터",
     "dropzone": "이미지를 드롭하거나 클릭하여 추가하세요",
     "metadataLoading": "메타데이터를 불러오는 중...",
@@ -76,7 +81,13 @@
     "copy": "복사",
     "copied": "복사 완료!"
   },
-
+  "tagDiff": {
+    "pageInfo": "두 이미지의 메타데이터 정보를 비교합니다",
+    "statusDiff": "{{count}}개의 차이가 있습니다",
+    "statusSame": "두 이미지가 동일합니다",
+    "rawDataA": "이미지 A",
+    "rawDataB": "이미지 B"
+  },
   "randomWeight": {
     "title": "랜덤 가중치 조합 생성",
     "pageInfo": "가중치와 등장확률을 랜덤으로 배치하여 씬 데이터를 생성합니다.\n단위를 0으로 설정하면 기본값인 0.01 단위로 가중치가 계산됩니다.",
