@@ -10,6 +10,7 @@ import TagRemover from './pages/TagRemover';
 import RandomWeight from './pages/SceneData/RandomWeight';
 import ScenePresetBatch from './pages/SceneData/ScenePresetBatch';
 import ScenePresetEdit from './pages/SceneData/ScenepresetEdit';
+import Image2Scene from './pages/SceneData/Image2Scene';
 import './App.css';
 
 const App: React.FC = () => {
@@ -28,6 +29,7 @@ const App: React.FC = () => {
               <Route path="/random-weight" element={<RandomWeight />} />
               <Route path="/scene-preset-batch" element={<ScenePresetBatch />} />
               <Route path="/scene-preset-edit" element={<ScenePresetEdit />} />
+              <Route path="/image-2-scene" element={<Image2Scene />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>
           </main>

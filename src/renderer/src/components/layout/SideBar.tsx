@@ -47,6 +47,10 @@ const SideBar: React.FC = () => {
               to="/scene-preset-edit"
               className={({ isActive }) => (isActive ? 'active' : '')}
             >{t('sideBar.scenePresetEdit')}</NavLink>
+            <NavLink 
+              to="/image-2-scene" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >{}{t('sideBar.image2Scene')}</NavLink>
           </div>
         </div>
         <NavLink 

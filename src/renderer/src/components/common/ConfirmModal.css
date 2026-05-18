@@ -59,6 +59,13 @@
   line-height: 1.5;
 }
 
+.modal-body p {
+  word-break: break-all;
+  white-space: pre-wrap;
+  text-align: center;
+  margin: 0;
+}
+
 .modal-actions {
   padding: 0px 16px 16px 14px;
   background-color: var(--color-step-2);

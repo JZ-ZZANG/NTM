@@ -40,6 +40,11 @@ interface AppState {
   scenePresetSourceJson: PresetJson | null; // ScenePresetEdit의 원본 JSON 데이터
   scenePresetEditModules: any[]; // ScenePresetEdit의 편집 모듈 리스트
   updateScenePresetEditSettings: (updates: { outputDir: string }) => void;
+  image2SceneSourceJson: PresetJson | null; // Image2Scene 전용 데이터
+  image2SceneEditModules: any[]; // Image2Scene 전용 편집 모듈
+  setImage2SceneSourceJson: (json: PresetJson | null) => void;
+  setImage2SceneEditModules: (modules: any[]) => void;
+  updateImage2SceneSettings: (updates: { outputDir: string }) => void;
   setTagRemoverProgress: (progress: number) => void;
   setIsTagRemoving: (isRunning: boolean) => void;
   setRandomWeightSets: (sets: ArtMixSet[]) => void;
@@ -68,10 +73,15 @@ export const useAppStore = create<AppState>()(persist((set) => ({
     },
     scenePresetEdit: { // ScenePresetEdit 전용 설정 추가
       outputDir: '',
-    }
+    },
+    image2Scene: { // Image2Scene 전용 설정 추가
+      outputDir: '',
+    },
   },
   scenePresetSourceJson: null, // 초기값 설정
   scenePresetEditModules: [], // 초기값 설정
+  image2SceneSourceJson: null,
+  image2SceneEditModules: [],
   setLanguage: (language) => {
     i18n.changeLanguage(language);
     set((state) => ({ settings: { ...state.settings, language } }));
@@ -101,8 +111,16 @@ export const useAppStore = create<AppState>()(persist((set) => ({
       scenePresetEdit: { ...state.settings.scenePresetEdit, ...updates }
     }
   })),
+  updateImage2SceneSettings: (updates) => set((state) => ({
+    settings: {
+      ...state.settings,
+      image2Scene: { ...state.settings.image2Scene, ...updates }
+    }
+  })),
   setScenePresetSourceJson: (json) => set({ scenePresetSourceJson: json }),
   setScenePresetEditModules: (modules) => set({ scenePresetEditModules: modules }),
+  setImage2SceneSourceJson: (json) => set({ image2SceneSourceJson: json }),
+  setImage2SceneEditModules: (modules) => set({ image2SceneEditModules: modules }),
 
   tagRemoverItems: [],
   tagRemoverProgress: 0,
@@ -126,8 +144,6 @@ export const useAppStore = create<AppState>()(persist((set) => ({
     randomWeightSets: state.randomWeightSets,
     randomWeightGenerateCount: state.randomWeightGenerateCount,
     scenePresetBlocks: state.scenePresetBlocks,
-    scenePresetSourceJson: state.scenePresetSourceJson, // persist에 추가
-    scenePresetEditModules: state.scenePresetEditModules, // persist에 추가
   }),
   // 로컬 스토리지에서 상태를 불러올 때, 기본값과 병합하여 스키마 변경에 대응
   merge: (persistedState, currentState) => {
@@ -146,12 +162,14 @@ export const useAppStore = create<AppState>()(persist((set) => ({
         ...currentState.settings.scenePresetEdit,
         ...((persistedState as any).settings?.scenePresetEdit || {}),
       },
+      image2Scene: {
+        ...currentState.settings.image2Scene,
+        ...((persistedState as any).settings?.image2Scene || {}),
+      },
       randomWeight: { // randomWeight 설정은 깊게 병합하여 누락된 필드 처리
         ...currentState.settings.randomWeight,
         ...((persistedState as any).settings?.randomWeight || {}), // 저장된 설정이 없으면 빈 객체 사용
       },
-      scenePresetSourceJson: (persistedState as any).scenePresetSourceJson || currentState.scenePresetSourceJson,
-      scenePresetEditModules: (persistedState as any).scenePresetEditModules || currentState.scenePresetEditModules,
     };
     return {
       ...currentState,
