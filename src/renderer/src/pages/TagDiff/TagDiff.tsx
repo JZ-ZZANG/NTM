@@ -14,88 +14,112 @@ interface LineDiff {
 }
 
 /**
- * 두 JSON 문자열을 줄 단위로 비교.
- * 각 줄에서 key를 추출해 매칭하고, 값이 다르면 'different',
- * 한쪽에만 있으면 'only-left' / 'only-right', 같으면 'same'.
+ * LCS 기반 줄 단위 diff (diffchecker 방식).
+ * 두 텍스트를 줄 배열로 나눈 뒤 LCS로 공통 줄을 찾고,
+ * 나머지를 removed/added로 분류한 다음 인접한 removed+added 쌍을 'different'로 묶음.
  */
-function jsonLineDiff(
-  leftJson: string,
-  rightJson: string,
-): { left: LineDiff[]; right: LineDiff[]; diffCount: number } {
+type RawOp = { type: 'same' | 'removed' | 'added'; text: string };
+
+function lcsLineDiff(leftJson: string, rightJson: string): {
+  left: LineDiff[];
+  right: LineDiff[];
+  diffCount: number;
+} {
   const lLines = leftJson.split('\n');
   const rLines = rightJson.split('\n');
+  const lLen = lLines.length;
+  const rLen = rLines.length;
 
-  const extractKey = (line: string) => {
-    const m = line.match(/^\s*"([^"]+)"/);
-    return m ? m[1] : null;
+  // LCS DP (길이만)
+  const dp: number[][] = Array.from({ length: lLen + 1 }, () => new Array(rLen + 1).fill(0));
+  for (let i = lLen - 1; i >= 0; i--) {
+    for (let j = rLen - 1; j >= 0; j--) {
+      if (lLines[i] === rLines[j]) {
+        dp[i][j] = dp[i + 1][j + 1] + 1;
+      } else {
+        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+  }
+
+  // LCS 역추적으로 ops 생성
+  const lOps: RawOp[] = [];
+  const rOps: RawOp[] = [];
+  let i = 0, j = 0;
+  while (i < lLen && j < rLen) {
+    if (lLines[i] === rLines[j]) {
+      lOps.push({ type: 'same', text: lLines[i] });
+      rOps.push({ type: 'same', text: rLines[j] });
+      i++; j++;
+    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+      lOps.push({ type: 'removed', text: lLines[i] });
+      i++;
+    } else {
+      rOps.push({ type: 'added', text: rLines[j] });
+      j++;
+    }
+  }
+  while (i < lLen) { lOps.push({ type: 'removed', text: lLines[i++] }); }
+  while (j < rLen) { rOps.push({ type: 'added', text: rLines[j++] }); }
+
+  // removed + added 인접 쌍을 'different'로 승격
+  // lOps의 removed와 rOps의 added가 같은 위치에 있으면 different
+  const promoteToLineDiff = (
+    lRaw: RawOp[],
+    rRaw: RawOp[],
+  ): { left: LineDiff[]; right: LineDiff[] } => {
+    // same 줄 기준으로 청크를 나눠 removed↔added를 짝지음
+    const left: LineDiff[] = [];
+    const right: LineDiff[] = [];
+
+    let li = 0, ri = 0;
+    let lNum = 1, rNum = 1;
+
+    while (li < lRaw.length || ri < rRaw.length) {
+      const lOp = lRaw[li];
+      const rOp = rRaw[ri];
+
+      // 양쪽 same
+      if (lOp?.type === 'same' && rOp?.type === 'same') {
+        left.push({ lineNum: lNum++, text: lOp.text, status: 'same' });
+        right.push({ lineNum: rNum++, text: rOp.text, status: 'same' });
+        li++; ri++;
+        continue;
+      }
+
+      // removed 블록 + added 블록 수집
+      const removedBlock: string[] = [];
+      const addedBlock: string[] = [];
+
+      while (li < lRaw.length && lRaw[li].type === 'removed') {
+        removedBlock.push(lRaw[li++].text);
+      }
+      while (ri < rRaw.length && rRaw[ri].type === 'added') {
+        addedBlock.push(rRaw[ri++].text);
+      }
+
+      // removed와 added가 같은 수면 → different (줄 단위 쌍)
+      // 수가 다르면 → 많은 쪽을 only-left/only-right, 나머지를 different
+      const pairCount = Math.min(removedBlock.length, addedBlock.length);
+      for (let k = 0; k < pairCount; k++) {
+        const st: DiffStatus = removedBlock[k] === addedBlock[k] ? 'same' : 'different';
+        left.push({ lineNum: lNum++, text: removedBlock[k], status: st });
+        right.push({ lineNum: rNum++, text: addedBlock[k], status: st });
+      }
+      for (let k = pairCount; k < removedBlock.length; k++) {
+        left.push({ lineNum: lNum++, text: removedBlock[k], status: 'only-left' });
+      }
+      for (let k = pairCount; k < addedBlock.length; k++) {
+        right.push({ lineNum: rNum++, text: addedBlock[k], status: 'only-right' });
+      }
+    }
+
+    return { left, right };
   };
 
-  // key → 왼쪽 줄 인덱스 목록
-  const lKeyMap = new Map<string, number[]>();
-  lLines.forEach((line, i) => {
-    const k = extractKey(line);
-    if (k) {
-      if (!lKeyMap.has(k)) lKeyMap.set(k, []);
-      lKeyMap.get(k)!.push(i);
-    }
-  });
-
-  const lMatched = new Set<number>();
-  const rMatched = new Set<number>();
-  // `li:ri` → DiffStatus
-  const pairMap = new Map<string, DiffStatus>();
-
-  rLines.forEach((rLine, ri) => {
-    const k = extractKey(rLine);
-    if (!k) return;
-    const candidates = lKeyMap.get(k) ?? [];
-    for (const li of candidates) {
-      if (lMatched.has(li)) continue;
-      lMatched.add(li);
-      rMatched.add(ri);
-      const st: DiffStatus =
-        lLines[li].trimEnd() === rLine.trimEnd() ? 'same' : 'different';
-      pairMap.set(`${li}:${ri}`, st);
-      break;
-    }
-  });
-
-  const resolveLeft = (i: number): DiffStatus => {
-    if (!lMatched.has(i)) {
-      // key가 없는 줄(괄호, 공백 등)은 same으로
-      return extractKey(lLines[i]) ? 'only-left' : 'same';
-    }
-    for (const [k, st] of pairMap) {
-      if (k.startsWith(`${i}:`)) return st;
-    }
-    return 'same';
-  };
-
-  const resolveRight = (i: number): DiffStatus => {
-    if (!rMatched.has(i)) {
-      return extractKey(rLines[i]) ? 'only-right' : 'same';
-    }
-    for (const [k, st] of pairMap) {
-      if (k.endsWith(`:${i}`)) return st;
-    }
-    return 'same';
-  };
-
-  const left: LineDiff[] = lLines.map((text, i) => ({
-    lineNum: i + 1,
-    text,
-    status: resolveLeft(i),
-  }));
-
-  const right: LineDiff[] = rLines.map((text, i) => ({
-    lineNum: i + 1,
-    text,
-    status: resolveRight(i),
-  }));
-
-  const diffCount =
-    left.filter(l => l.status !== 'same').length +
-    right.filter(r => r.status !== 'same').length;
+  const { left, right } = promoteToLineDiff(lOps, rOps);
+  const diffCount = left.filter(l => l.status !== 'same').length
+                  + right.filter(r => r.status !== 'same').length;
 
   return { left, right, diffCount };
 }
@@ -268,7 +292,7 @@ const TagDiff: React.FC = () => {
     if (!bothLoaded) {
       return { left: toPlainLines(leftRaw), right: toPlainLines(rightRaw), diffCount: 0 };
     }
-    return jsonLineDiff(leftRaw, rightRaw);
+    return lcsLineDiff(leftRaw, rightRaw);
   }, [leftRaw, rightRaw, bothLoaded]);
 
   return (
