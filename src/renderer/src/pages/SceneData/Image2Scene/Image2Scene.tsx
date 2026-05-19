@@ -37,7 +37,7 @@ type EditModule = {
 
 // 태그 분리 헬퍼 (가중치 구문 1.2::tag1, tag2:: 지원)
 const splitTags = (prompt: string): string[] => {
-  const regex = /(\d+(?:\.\d+)?::.*?::|[^,]+)/g;
+  const regex = /(\d+(?:\.\d+)?::.*?::|[^,\n]+)/g;
   return (prompt.match(regex) || []).map(t => t.trim()).filter(Boolean);
 };
 
